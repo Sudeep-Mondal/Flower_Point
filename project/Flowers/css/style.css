@@ -1,0 +1,139 @@
+/* General Styling */
+#head {
+  width: 100%;
+  height: 300px;
+  background-image: url(../images/flower.jpeg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+#head1 {
+  width: 100%;
+  height: 300px;
+  background-color: rgba(0, 128, 128, 0.4); /* semi-transparent dark cyan */
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+#head2 {
+  width: 80%;
+  position: absolute;
+  top: 50px;
+  left: 10%;
+  z-index: 3;
+  color: white;
+  font-size: 1.5em;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Navigation Menu */
+ul {
+  position: absolute;
+  top: 320px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: darkcyan;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  flex: 1;
+  text-align: center;
+}
+
+li a {
+  display: block;
+  padding: 15px 0;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+li a:hover {
+  background-color: white;
+  color: darkcyan;
+}
+
+/* Footer */
+#foot {
+  width: 100%;
+  height: 40px;
+  color: white;
+  font-size: 1.2em;
+  text-align: center;
+  background-color: rgb(23, 123, 123);
+  position: fixed;
+  bottom: 0;
+  line-height: 40px;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 960px) {
+  #head {
+      height: 400px;
+  }
+
+  #head1 {
+      height: 400px;
+  }
+
+  #head2 {
+      top: 80px;
+      font-size: 1.2em;
+  }
+
+  ul {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  li {
+      width: 100%;
+  }
+
+  #foot {
+      font-size: 1em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #head {
+      height: 500px;
+  }
+
+  #head1 {
+      height: 500px;
+  }
+
+  #head2 {
+      top: 100px;
+      font-size: 1.1em;
+  }
+
+  ul {
+      top: 510px;
+      flex-direction: column;
+  }
+
+  li a {
+      font-size: 1.2em;
+      padding: 12px 0;
+  }
+
+  #foot {
+      font-size: 0.9em;
+      position: absolute;
+      top: 810px;
+  }
+}

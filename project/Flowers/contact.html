@@ -1,0 +1,198 @@
+<html>
+    <head>
+        <title>Contact</title>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        
+<script src="./script/script.js"></script>
+
+    </head>
+    <style>
+        #lab
+        {
+        font-size:21px;
+        color:black;
+        }
+        #t1,#t2,#t3,#p1,#lang,#text_data
+        {
+        height:35px;
+         width:350px; 
+        
+         box-shadow:2px 2px 2px #DEDEDE,-2px -2px 2px #DEDEDE;
+         }
+         #form
+         {
+             position:absolute;
+             top:390px;
+            left:43%;
+            width:49%;
+         }
+         fieldset
+         {
+             width:49%;
+         }
+         #detail
+         {
+            position:absolute;
+            top:500px;
+            width:42%;
+            border-radius: 8px;
+            border: 1px solid #00695C;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+         }
+
+         #detail p {
+    font-size: 16px;
+    margin: 10;
+    padding: 0;
+}
+
+#detail b {
+    color: #7e6f18; /* Gold color for emphasis */
+    font-size: 18px;
+}
+
+#detail p::before {
+    content: "📞 ";
+    font-size: 18px;
+    color: #FFD700;
+    margin-right: 5px;
+}
+
+#detail p span {
+    display: block;
+    font-size: 15px;
+    margin: 8px 0;
+}
+
+         @media screen and (max-width:800px) {
+             #detail
+             {
+                 width:99%;
+                 margin-top:400px;
+             }
+             fieldset
+         {
+             width:99%;
+         }
+         
+             #form
+             {
+                 width:100%;
+                 margin-top:850px;
+                 left:0px;
+             }
+          #foot
+          {
+              top:1800px;
+          }   
+         }
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        </style>
+    
+    <body>
+        <div id="head"></div>
+<div id="head1"></div>
+<div id="head2">
+    <h1 style="display: flex; justify-content: center;">Delivering Smiles To Your Loved Ones Across World</h1>
+</div>
+<ul>
+    <li><a href="index.html">home</a></li>
+    <li><a href="product.html">product</a></li>
+    <li><a href="#"  style="background-color:white;color:darkcyan;">contact</a></li>
+    <li><a href="about.html">about</a></li>
+    <li><a href="gallery.html">gallery</a></li>
+</ul>
+
+<div id="detail">
+<p><b>Free Toll :</b> +91 1800-567-345
+    <br><br>
+<b>Call Us At :</b>
+<br><br>
+<b>India :</b> +91 986-678-4567<br><br>
+<b>US :</b> +1 839-456-1234<br><br>
+<b>Australia :</b> +61 567-56-1234<br><br>
+<b>Whatsapp Us At:</b> +91 987-654-2345<br><br>
+
+<b>Email Us At:</b> point.flower@gmail.com<br>
+<br>
+
+For Any Query ? Contact Us By Sign In With Given Form
+</p>
+
+
+</div>
+<div id="form">
+        
+        <fieldset style="width:800px; padding-left:40px">
+        <legend style="font-size:25px; color:red;">Details</legend>
+        <form action="index.html" method="get" onsubmit="return validate()">
+        <table cellspacing="20px">
+        <tr>
+        <td><label id="lab">First Name <span style="color:red">*</span></label></td>
+        <td><input type="text" id="t1" name="t1" value="" placeholder="First Name" onChange="validateField(this)" autofocus/> <br><span style="color:red" id="text1"></span>
+        </td>
+        </tr>
+        
+        <tr>
+        <td><label id="lab">Last Name<span style="color:red">*</span></label></td>
+        <td><input type="text" id="t2" name="t2"  placeholder="Last Name" onChange="validateField(this)" ><br><span style="color:red" id="text2"></span>
+        </td>
+        </tr>
+        
+        <tr>
+        <td><label id="lab">Email<span style="color:red">*</span></label></td>
+        <td><input type="text" id="t3"   name="t3"  placeholder="abc@email.com" onChange="ValidateEmail(this)"><br><span style="color:red" id="text3"></span>
+        </td>
+        </tr>
+        
+        <tr>
+        <td><label id="lab">Paswword<span style="color:red">*</span></label></td>
+        <td><input type="password" id="p1"       name="p1" onChange="CheckPassword(this)" placeholder="Password"><br><span style="color:red" id="text4"></span>
+        </td>
+        </tr>
+        
+        <tr>
+        <td><label id="lab">Gender<span style="color:red">*</span></label></td>
+        <td>
+        <input type="radio" id="gen" name="gen" onChange="check_Radio(this)"  value="male"><span id="lab">Male</span>
+        <input type="radio" id="gen" name ="gen" onChange="check_Radio(this)" value="female"><span id="lab">Female</span>
+        <input type="radio" id="gen" name="gen"  onChange="check_Radio(this)" value="other"><span id="lab">Others</span><br><span style="color:red" id="text5"></span>
+        </td>
+        </tr>
+        <tr>
+        <td><label id="lab">Select Any Language<span style="color:red">*</span></label></td>
+        <td><select id="lang" onChange="checkList(this)">
+        <option value="--Language--">--Language--</option>
+        <option value="Hindi">Hindi</option>
+        <option value="English">English</option>
+        <option value="French">French</option>
+        <option value="Spanish">Spanish</option></select><br>
+        <span style="color:red" id="text7"></span>
+        </td>
+        <tr>
+        <td><label id="lab">Any Comment?<span style="color:red">*</span></label></td>
+        <td>
+        <textarea cols="46" rows="5" id="text_data" onkeydown="check_comment(this)" style="border-radius:5px; box-shadow:2px 2px 2px #DEDEDE,-2px -2px 2px #DEDEDE;"></textarea><br>
+        <span id="t" style="color:red;"></span>
+        </td>
+        </tr>
+        <tr><td align="center"colspan="2">
+        <button style="height:40px; width:500px; background-color:white; color:red; font-size:20px;" id="btn1">Submit</button></td>
+        </tr>
+        </table>
+        </form>
+        </fieldset>
+
+        
+</div>
+<div style="height:50px; position:absolute; top:950px;width:99%;"></div>
+
+<div id='foot'>&copy; 2024 User Detail</div>
+</body>
+</html>
+

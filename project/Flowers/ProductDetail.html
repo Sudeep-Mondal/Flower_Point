@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            font-size: 2.2em;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.8;
+        }
+        .price {
+            font-size: 1.5em;
+            color: #00796B;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .buy-now {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .buy-now button {
+            background: #4CAF50;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .buy-now button:hover {
+            background: #388E3C;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="product-name">Loading...</h1>
+        <img id="product-image" src="./images/default.jpg" alt="Product Image">
+        <p id="product-description">Loading product description...</p>
+        <div class="price" id="product-price">Loading...</div>
+        <div class="buy-now">
+            <button id="buy-now-btn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+        </div>
+        <div class="back-link">
+            <a href="product.html">Back to Products</a>
+        </div>
+    </div>
+
+    <script>
+        // Get the product key from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productKey = urlParams.get('product');
+
+        // Fetch product data from the backend API
+        fetch(`http://localhost:3001/api/products/${productKey}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Product not found');
+                }
+                return response.json();
+            })
+            .then(product => {
+                // Populate the product details dynamically
+                document.getElementById('product-name').textContent = product.name;
+                document.getElementById('product-image').src = product.image_url || './images/default.jpg';
+                document.getElementById('product-description').textContent = product.description;
+                document.getElementById('product-price').textContent = `$${product.price}`;
+            })
+            .catch(error => {
+                // Handle errors if product is not found
+                document.getElementById('product-name').textContent = "Product Not Found";
+                document.getElementById('product-description').textContent = "The product you are looking for is not available.";
+                document.getElementById('product-price').textContent = "";
+                document.getElementById('product-image').src = './images/default.jpg';
+            });
+
+        // Buy Now button functionality
+        const buyNowBtn = document.getElementById('buy-now-btn');
+        buyNowBtn.addEventListener('click', () => {
+            if (productKey) {
+                const orderPageUrl = `order.html?product=${productKey}`;
+                window.location.href = orderPageUrl;
+            } else {
+                alert("Product not available for purchase.");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            font-size: 2.2em;
+        }
+        .product-details {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .product-details img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .product-details .info {
+            flex: 1;
+        }
+        .product-details .info p {
+            margin: 5px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .form-group button {
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #388E3C;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Place Order</h1>
+
+        <!-- Product Details Section -->
+        <div class="product-details">
+            <img id="product-image" src="./images/default.jpg" alt="Product Image">
+            <div class="info">
+                <h2 id="product-name">Loading...</h2>
+                <p id="product-price">Loading...</p>
+                <p id="product-description">Loading product description...</p>
+            </div>
+        </div>
+
+        <!-- Order Form Section -->
+        <h3>Enter Your Details</h3>
+        <form id="order-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="address">Shipping Address</label>
+                <textarea id="address" name="address" rows="4" required placeholder="Enter your shipping address"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <button type="submit">Place Order</button>
+            </div>
+        </form>
+
+        <!-- Back Link -->
+        <div class="back-link">
+            <a href="product.html">Back to Products</a>
+        </div>
+    </div>
+
+    <script>
+        // Get the product key from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productKey = urlParams.get('product');
+        let productData = null;
+
+        // Fetch product details from the backend
+        fetch(`http://localhost:3001/api/products/${productKey}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Product not found');
+                }
+                return response.json();
+            })
+            .then(product => {
+                productData = product;
+                // Populate the product details
+                document.getElementById('product-name').textContent = product.name;
+                document.getElementById('product-image').src = product.image_url || './images/default.jpg';
+                document.getElementById('product-description').textContent = product.description;
+                document.getElementById('product-price').textContent = `$${product.price}`;
+            })
+            .catch(error => {
+                // Handle errors
+                document.getElementById('product-name').textContent = "Product Not Found";
+                document.getElementById('product-description').textContent = "The product you are looking for is not available.";
+                document.getElementById('product-price').textContent = "";
+                document.getElementById('product-image').src = './images/default.jpg';
+            });
+
+        // Handle the order form submission
+        const orderForm = document.getElementById('order-form');
+        orderForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if (!productData) {
+                alert("Product details not found.");
+                return;
+            }
+
+            // Collect the order details
+            const orderDetails = {
+                product: productData,
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                phone: document.getElementById('phone').value,
+            };
+
+            // Send the order to the backend
+            fetch('http://localhost:3001/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderDetails),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to place the order');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Your order has been placed successfully!');
+                window.location.href = 'order-confirmation.html';  // Redirect to an order confirmation page
+            })
+            .catch(error => {
+                alert('Error placing the order: ' + error.message);
+            });
+        });
+    </script>
+</body>
+</html>
+

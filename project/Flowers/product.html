@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <title>Products</title>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+    </head>
+    <style>
+@media screen and (max-width:700px) {
+    
+    #box
+    {
+        position:absolute; 
+    
+      width:98%;
+        margin-top:350px;
+    }
+    #foot
+    {
+        margin-top:1300px;
+    }
+}
+#box
+{
+    position:absolute; 
+     top:400px;
+      width:98%
+}
+
+
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .product-cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .product-card {
+        width: 30%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .product-card img {
+        width: 100%;
+        height: 200px; 
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    .product-card a {
+        display: block;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .product-card .price {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #e60000;
+    }
+    .view-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .view-button:hover {
+        background-color: #45a049;
+    }
+    .update-note {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 20px;
+        color: #888;
+    }
+    
+
+    </style>
+    <body>
+        <div id="head"></div>
+<div id="head1"></div>
+<div id="head2">
+    <h1 style="display: flex; justify-content: center;">Delivering Smiles To Your Loved Ones Across World</h1>
+</div>
+<ul>
+    <li><a href="index.html">home</a></li>
+    <li><a href="#" style="background-color:white;color:darkcyan;">product</a></li>
+    <li><a href="contact.html">contact</a></li>
+    <li><a href="about.html">about</a></li>
+    <li><a href="gallery.html">gallery</a></li>
+</ul>
+
+<body>
+    <h1>Our Products</h1>
+
+    <div class="box">
+        <div id="product-container" class="product-cards-container"></div>
+    </div>
+
+    <script>
+    // Fetch the products data from the backend API
+    fetch('http://localhost:3001/api/products')
+    .then(response => response.json())
+    .then(products => {
+        const container = document.getElementById('product-container');
+        
+        // Loop through each product and create a product card
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.classList.add('product-card');
+
+            // Create and append the image
+            const img = document.createElement('img');
+            img.src = product.image_url; // Assuming image_url is a field in your database
+            img.alt = product.name;
+            card.appendChild(img);
+
+            // Create and append the product name
+            const title = document.createElement('a');
+            title.href = `ProductDetail.html?product=${product.name}`;
+            title.textContent = product.name;
+            card.appendChild(title);
+
+            // Create and append the product price
+            const price = document.createElement('p');
+            price.classList.add('price');
+            price.textContent = `$${product.price}`;
+            card.appendChild(price);
+
+            // Create and append the 'View' button
+            const button = document.createElement('a');
+            button.href = `ProductDetail.html?product=${product.name}`;
+            button.classList.add('view-button');
+            button.textContent = 'View';
+            card.appendChild(button);
+
+            // Append the product card to the container
+            container.appendChild(card);
+        });
+    })
+    .catch(error => console.error('Error fetching products:', error));
+    </script>
+
+<div style="height:50px; position:absolute; top:1400px; width:99%;"></div>
+<div id='foot'>&copy; 2024 User Detail</div>
+</body>
+   
+</body>
+</html>
+
