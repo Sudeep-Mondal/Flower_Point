@@ -7,10 +7,14 @@ const cors = require('cors');  // Import the CORS package
 
 const app = express();
 
-app.use(cors()); 
 
+
+// Enable CORS for all routes
+app.use(cors());  // This will allow all domains to access the API
+
+// Middleware to parse JSON and serve static files
 app.use(bodyParser.json());
-app.use(express.static('Flowers'));  
+app.use(express.static('Flowers'));  // Assuming your static files are in the 'Flowers' folder
 
 // Database connection
 const db = mysql.createConnection({

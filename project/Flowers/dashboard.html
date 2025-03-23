@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome to Admin Dashboard</h2>
+        <button id="logout-btn">Logout</button>
+
+        <h3>Manage Users</h3>
+        <table id="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Users will be dynamically populated -->
+            </tbody>
+        </table>
+
+        <h3>Add New Product</h3>
+<form id="add-Product-Form">
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" name="productName" required><br><br>
+
+    <label for="productPrice">Product Price:</label>
+    <input type="number" id="productPrice" name="productPrice" required><br><br>
+
+    <label for="productDescription">Product Description:</label>
+    <textarea id="productDescription" name="productDescription" required></textarea><br><br>
+
+    <label for="productImage">Product Image URL:</label>
+    <input type="text" id="productImage" name="productImage" required><br><br>
+
+    <button type="submit">Add Product</button>
+</form>
+
+<div id="result"></div>
+
+        
+    
+    <script src="dashboard.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn.lock
+yarn-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build and output directories
+/build
+/.next
+/out
+.vite
+.vitepress
+
+# Log files
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Coverage reports
+/coverage
+
+# Cache and temporary files
+.cache/
+.tmp/
+*.swp
+*.swo
+*.bak
+
+# Linting and test cache
+.eslintcache
+.jest/
+
+# Editor and OS files
+.vscode/
+.idea/
+*.sublime-workspace
+.DS_Store
+Thumbs.db
